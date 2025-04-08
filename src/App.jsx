@@ -1,10 +1,10 @@
 import { DocumentIcon, HandRaisedIcon, ScissorsIcon } from '@heroicons/react/24/solid';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
   const [currentOption, setCurrentOption] = useState(null);
-  const [oponentOption, setOponentOption] = useState(null);
+  const [opponentOption, setOpponentOption] = useState(null);
   const options = ['rock', 'paper', 'scissors'];
 
   const getIcon = (option) => {
@@ -20,9 +20,24 @@ function App() {
     }
   };
 
-  const handleClick = () => {
-    const newOption = options[Math.floor(Math.random() * options.length)];
-    setOponentOption(newOption);
+  useEffect(() => {
+    // TODO: setWinner
+  }, [opponentOption]);
+
+  const play = async () => {
+    if (opponentOption) return;
+    if (!currentOption) return;
+    const oppOption = options[Math.floor(Math.random() * options.length)];
+    setOpponentOption(oppOption);
+  };
+
+  const setWinner = async (option) => {
+    /* TODO: setWinner */
+  };
+
+  const handleOptionSelect = (option) => {
+    if (opponentOption) return;
+    setCurrentOption(option);
   };
 
   return (
@@ -34,8 +49,10 @@ function App() {
           {options.map((option) => (
             <div
               key={option}
-              onClick={() => setCurrentOption(option)}
-              className="button cursor-pointer p-4 text-xl font-bold"
+              onClick={() => handleOptionSelect(option)}
+              className={`button cursor-pointer p-4 text-xl font-bold ${
+                currentOption === option ? 'text-blue-400' : ''
+              }`}
               title={option}
             >
               {getIcon(option)}
@@ -44,21 +61,16 @@ function App() {
         </div>
       </div>
       <div className="mt-5 flex gap-4">
-        <button onClick={handleClick} className="button cursor-pointer text-xl font-bold">
+        <button onClick={play} className="button cursor-pointer text-xl font-bold">
           Play
         </button>
       </div>
+      {/* replace with winner section */}
       <div className="mt-5 flex gap-4">
-        {oponentOption && (
+        {opponentOption && (
           <div className="flex items-center gap-2">
-            <span>Oponent chose:</span>
-            {getIcon(oponentOption)}
-          </div>
-        )}
-        {currentOption && (
-          <div className="flex items-center gap-2">
-            <span>You chose:</span>
-            {getIcon(currentOption)}
+            <span>Opponent chose:</span>
+            {getIcon(opponentOption)}
           </div>
         )}
       </div>
