@@ -5,14 +5,30 @@ export default function useOptions() {
   const [currentOption, setCurrentOption] = useState(null);
   const [opponentOption, setOpponentOption] = useState(null);
   const [winner, setWinner] = useState(null);
+  const [counter, setCounter] = useState({
+    you: 0,
+    opponent: 0,
+    total: 0,
+  });
 
   useEffect(() => {
     if (!opponentOption) return;
     const getWinner = async () => {
       const result = await checkWinner(currentOption, opponentOption);
-      if (!result) setWinner('draw');
-      else {
+      if (!result) {
+        setWinner('draw');
+        setCounter((prev) => ({
+          ...prev,
+          total: prev.total + 1,
+        }));
+      } else {
         setWinner(result);
+        const currentWinner = result === currentOption ? 'you' : 'opponent';
+        setCounter((prev) => ({
+          ...prev,
+          [currentWinner]: prev[currentWinner] + 1,
+          total: prev.total + 1,
+        }));
       }
     };
     getWinner();
@@ -41,5 +57,6 @@ export default function useOptions() {
     play,
     reset,
     handleOptionSelect,
+    counter,
   };
 }

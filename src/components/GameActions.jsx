@@ -11,7 +11,7 @@ function GameActions({ play, reset }) {
         onClick={reset}
         className="button cursor-pointer border px-3 py-1 text-xl font-bold hover:bg-gray-700"
       >
-        Reset
+        Try Again
       </button>
     </div>
   );
