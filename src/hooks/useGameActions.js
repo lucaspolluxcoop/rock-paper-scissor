@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { checkWinner, getOpponentOption } from '../utils/gameLogic.jsx';
 
-export default function useOptions() {
+export default function useGameActions() {
   const [currentOption, setCurrentOption] = useState(null);
   const [opponentOption, setOpponentOption] = useState(null);
   const [winner, setWinner] = useState(null);
@@ -32,7 +32,7 @@ export default function useOptions() {
       }
     };
     getWinner();
-  }, [opponentOption]);
+  }, [opponentOption, currentOption]);
 
   const play = async () => {
     const option = getOpponentOption(opponentOption, winner, currentOption);
@@ -54,9 +54,9 @@ export default function useOptions() {
     currentOption,
     opponentOption,
     winner,
+    counter,
     play,
     reset,
     handleOptionSelect,
-    counter,
   };
 }

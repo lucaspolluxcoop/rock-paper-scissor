@@ -3,11 +3,12 @@ import Choices from './components/Choices';
 import GameActions from './components/GameActions';
 import GameStats from './components/GameStats';
 import Result from './components/Result';
-import useOptions from './hooks/useOptions';
+import useGameActions from './hooks/useGameActions';
 
 function App() {
-  const { currentOption, opponentOption, winner, play, reset, handleOptionSelect, counter } =
-    useOptions();
+  const { currentOption, opponentOption, winner, counter, play, reset, handleOptionSelect } =
+    useGameActions();
+
   return (
     <div className="flex h-screen flex-col items-center justify-center">
       <GameStats counter={counter} />
