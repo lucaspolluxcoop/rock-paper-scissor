@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { checkWinner, getOpponentOption } from '../utils/gameLogic.jsx';
+import { checkWinner, getOpponentOption } from '../utils/gameLogic.js';
 
 export default function useGameActions() {
   const [currentOption, setCurrentOption] = useState(null);

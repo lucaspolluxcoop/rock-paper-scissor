@@ -1,6 +1,7 @@
-import { getIcon, options } from '../utils/gameLogic.jsx';
+import { options } from '../utils/gameLogic.js';
+import { getIcon } from './GameIcons';
 
-function MyChoice({ currentOption, handleOptionSelect, opponentOption }) {
+function Choices({ currentOption, handleOptionSelect, opponentOption }) {
   return (
     <>
       <div className="mt-5 flex flex-row items-center justify-center gap-3">
@@ -30,4 +31,4 @@ function MyChoice({ currentOption, handleOptionSelect, opponentOption }) {
   );
 }
 
-export default MyChoice;
+export default Choices;
